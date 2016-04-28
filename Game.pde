@@ -1,15 +1,29 @@
 class Game {
+  
   ArrayList<Territory> territories;
   ArrayList<Player> players;
+  boolean hasSelectedTerr[];
+
   int playerind;
   int mx, my;
   boolean hasSelectedE = true;
+  boolean hasSelectedD = true;
+  boolean hasSelectedC = true;
+  boolean hasSelectedB = true;
   boolean hasSelectedA = true;
   Territory selectedA;
+  Territory selectedB;
+  Territory selectedC;
+  Territory selectedD;
   Territory selectedE;
+  
   Game() {
     territories = new ArrayList<Territory>();
     players = new ArrayList<Player>();
+    hasSelectedTerr = new boolean[territories.size()];
+    
+    
+
     playerind = 0;
   }
   Game drawTerritories() {
@@ -34,8 +48,9 @@ class Game {
   }
 
   Game makeMove() {
-    hasSelectedA = false;
-    hasSelectedE = false;   
+   for(int i =0; i <= territories.size(); i++){
+      game.hasSelectedTerr[i] = false;
+   }
     println("make");
     return this;
     
@@ -62,6 +77,22 @@ class Game {
       }
     }
 
+  return this;
+  }
+  
+  Game addArmies(int terrX, int terrY){
+    mx = terrX;
+    my = terrY;
+   for (Territory t : territories) {
+        int dx = mx-t.xpos;
+        int dy = my-t.ypos;
+        if (dx*dx+dy*dy<t.r*t.r) {
+          terrArmies.set(t.indexCreated, terrArmies.get(t.indexCreated)+1);
+        }
+        
+   }
+    
+   
   return this;
   }
 }

@@ -7,22 +7,32 @@ Player player2;
 Player player3;
 
 
+int gameStatus;
+ArrayList<Territory> tempterrs = new ArrayList<Territory>();
+ArrayList<Integer>   terrArmies = new ArrayList<Integer>();
 
 void setup() {
   size(800,800);
   game = new Game();
-  
+  gameStatus = 1;
   player1 = new Player(color(255,0,0));
   player2 = new Player(color(0,255,0));
   player3 = new Player(color(0,0,255));
   
   
-  ArrayList<Territory> tempterrs = new ArrayList<Territory>();
-  tempterrs.add(new Territory(player1,10,5,200,600));
-  tempterrs.add(new Territory(player2,10,7,300,450));
-  tempterrs.add(new Territory(player3,10,3,300,300));
-  tempterrs.add(new Territory(player2,10,2,450,200));
-  tempterrs.add(new Territory(player1,10,1,690,550));
+
+
+
+  terrArmies.add((0));
+  tempterrs.add(new Territory(player1,10,terrArmies.get(0),200,600, tempterrs.size()));
+  terrArmies.add((0));
+  tempterrs.add(new Territory(player2,10,terrArmies.get(1),300,450, tempterrs.size()));
+  terrArmies.add((0));
+  tempterrs.add(new Territory(player3,10,terrArmies.get(2),300,300, tempterrs.size()));
+  terrArmies.add((0));
+  tempterrs.add(new Territory(player2,10,terrArmies.get(3),450,200, tempterrs.size()));
+  terrArmies.add((0));
+  tempterrs.add(new Territory(player1,10,terrArmies.get(4),690,550, tempterrs.size()));
   
   //for (int i = 0; i < number; i++) {
   //  tempterrs.add(new Territory(new Player(),10,5,int(random(800)),int(random(800))));
@@ -52,5 +62,10 @@ void keyPressed() {
 }
 
 void mouseClicked() {
-  game.hasSelected(mouseX, mouseY);
+  if (gameStatus==1){
+    game.addArmies(mouseX, mouseY);
+  }
+  if (gameStatus == 2){
+      game.hasSelected(mouseX, mouseY);
+  }
 }
